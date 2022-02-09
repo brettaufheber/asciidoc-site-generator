@@ -1,0 +1,24 @@
+{
+  "options": {
+    "common": [
+      {
+        "parameter": "-i, --resources-paths <directory path, ...>",
+        "description": "One or more comma separated input directories in which parts of the project are located.",
+        "default": "./",
+        "mapping": {
+          "key": "resourcesPaths",
+          "env": "INPUT_RESOURCES_PATHS"
+        }
+      },
+      {
+        "parameter": "-o, --pages-path <directory path>",
+        "description": "The output directory in which the results end up.",
+        "default": "./pages",
+        "mapping": {
+          "key": "pagesPath",
+          "env": "INPUT_PAGES_PATH"
+        }
+      }
+    ]
+  }
+}

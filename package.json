@@ -1,0 +1,67 @@
+{
+  "name": "asciidoc-site-generator",
+  "version": "0.1.0",
+  "description": "A static website generator using AsciiDoc files and Handlebars templates",
+  "license": "MIT",
+  "author": {
+    "name": "Eric Löffler",
+    "email": "eric.loeffler@opalia.systems",
+    "url": "https://github.com/brettaufheber"
+  },
+  "homepage": "https://github.com/brettaufheber/asciidoc-site-generator#readme",
+  "bugs": {
+    "url": "https://github.com/brettaufheber/asciidoc-site-generator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brettaufheber/asciidoc-site-generator.git"
+  },
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node .",
+    "build": "ncc build ./src/index.js -o ./dist --license licenses.txt",
+    "test": "jest",
+    "scan": "sonar-scanner"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.x",
+    "js-yaml": "^4.1.x",
+    "dotenv": "^16.0.x",
+    "commander": "^9.0.x",
+    "asciidoctor": "^2.2.x",
+    "handlebars": "^4.7.x",
+    "basic-handlebars-helpers": "^3.0.x",
+    "sass": "^1.49.x",
+    "less": "^4.1.x"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.33.x",
+    "jest": "^27.5.x",
+    "jest-sonar-reporter": "^2.0.x",
+    "sonarqube-scanner": "^2.8.x"
+  },
+  "jest": {
+    "verbose": true,
+    "testMatch": [
+      "**/test/src/**/*.test.js"
+    ],
+    "testTimeout": 60000,
+    "testResultsProcessor": "jest-sonar-reporter",
+    "collectCoverage": true,
+    "coverageDirectory": "./tmp/coverage",
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**/*.js",
+      "!**/node_modules/**"
+    ]
+  },
+  "jestSonar": {
+    "reportPath": "./tmp",
+    "reportFile": "test-report.xml",
+    "indent": 4
+  }
+}
