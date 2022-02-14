@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html {{~#attributes.lang}} lang="{{.}}" {{~/attributes.lang}}>
+<head>
+  {{#attributes.doctitle}}
+  <title>{{.}}</title>
+  {{/attributes.doctitle}}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="generator" content="{{generator.name}}">
+  {{#with attributes}}
+  {{#app-name}}
+  <meta name="application-name" content="{{.}}">
+  {{/app-name}}
+  {{#description}}
+  <meta name="description" content="{{.}}">
+  {{/description}}
+  {{#keywords}}
+  <meta name="keywords" content="{{.}}">
+  {{/keywords}}
+  {{#copyright}}
+  <meta name="copyright" content="{{.}}">
+  {{/copyright}}
+  {{#author}}
+  <meta name="author" content="{{.}}">
+  {{/author}}
+  {{#stylesdir}}
+  {{#../stylesheet}}
+  <link type="text/css" rel="stylesheet" href="{{../../stylesdir}}/{{../../stylesheet}}">
+  {{/../stylesheet}}
+  {{/stylesdir}}
+  {{/with}}
+  <link type="text/css" rel="stylesheet" href="asset/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="asset/css/highlighting/github.css">
+  <script type="text/javascript" src="asset/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="asset/node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+{{> header}}
+{{> content}}
+{{> footer}}
+</body>
+</html>

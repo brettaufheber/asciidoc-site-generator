@@ -1,0 +1,26 @@
+<footer>
+  <div class="container">
+    <hr>
+    <b>Collections:</b>
+    <ul>
+      {{#each collections}}
+      <li>
+        {{@key}}
+        <ul>
+          {{#each .}}
+          <li>{{@key}}: {{.}}</li>
+          {{/each}}
+        </ul>
+      </li>
+      {{/each}}
+    </ul>
+    <hr>
+    <b>AsciiDoc attributes:</b>
+    <ul>
+      {{#each attributes}}
+      <li>{{@key}}: {{.}}</li>
+      {{/each}}
+    </ul>
+    <br>
+  </div>
+</footer>

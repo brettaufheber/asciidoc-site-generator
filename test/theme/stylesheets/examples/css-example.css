@@ -1,0 +1,9 @@
+body {
+    background-color: white;
+    color: black;
+}
+
+.inverse {
+    background-color: black;
+    color: white;
+}
