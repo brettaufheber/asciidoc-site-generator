@@ -13,11 +13,15 @@ const asciidoctor = require('asciidoctor')();
 // register Handlebars helpers
 require('basic-handlebars-helpers').helpers.register();
 
+// register extensions for asciidoctor.js
+require('asciidoctor-highlight.js').register(asciidoctor.Extensions);
+
 // setup AsciiDoc for Handlebars helpers
 asciidoc.setupAsciidoctor(asciidoctor, {
     'linkcss': true,
     'stylesdir': './asset/css',
-    'stylesheet': 'asciidoctor.css'
+    'stylesheet': 'asciidoctor.css',
+    'source-highlighter': 'highlightjs-ext'
 });
 
 async function installDependencies(resourcesPath, pagesPath) {
@@ -56,12 +60,15 @@ async function copyResources(resourcesPath, pagesPath) {
 
     console.log(`Copy static files (target ${pagesPath})`);
 
-    fse.mkdirpSync(path.join(pagesPath, 'asset/css'));
+    fse.mkdirpSync(path.join(pagesPath, 'asset/css/highlighting'));
 
     if (fs.existsSync('./node_modules')) {
 
         // copy default CSS file for asciidoctor
         await fse.copy('./node_modules/@asciidoctor/core/dist/css', path.join(pagesPath, 'asset/css'));
+
+        // copy CSS files for syntax asciidoctor-highlight
+        await fse.copy('./node_modules/highlight.js/styles', path.join(pagesPath, 'asset/css/highlighting'));
 
     } else {
 
