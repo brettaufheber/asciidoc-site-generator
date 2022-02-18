@@ -1,6 +1,7 @@
 const pkg = require('../package.json');
 const config = require('./config.json');
 const utils = require('./lib/utils');
+const git = require('./lib/git');
 const tasks = require('./lib/tasks');
 const fse = require('fs-extra');
 const path = require('path');
@@ -17,6 +18,23 @@ async function build(metadata, taskCallbacks) {
 
         for (const callback of taskCallbacks)
             await callback(resourcesPath, pagesPath, metadata);
+    });
+}
+
+async function buildAndPublish(metadata, taskCallbacks) {
+
+    await utils.withTempDir(pkg.name, async (resourcesPath) => {
+
+        await utils.withTempDir(pkg.name, async (pagesPath) => {
+
+            await git.withRepo(pagesPath, async () => {
+
+                await mergeResources(resourcesPath);
+
+                for (const callback of taskCallbacks)
+                    await callback(resourcesPath, pagesPath, metadata);
+            });
+        });
     });
 }
 
@@ -45,10 +63,19 @@ async function main() {
     dotenv.config();
 
     const program = new Command();
+    let target;
 
     program
         .version(pkg.version)
         .description(pkg.description);
+
+    const commandBuild = new Command()
+        .command(config.commands.build.name)
+        .description(config.commands.build.description);
+
+    const commandBuildAndPublish = new Command()
+        .command(config.commands.buildAndPublish.name)
+        .description(config.commands.buildAndPublish.description);
 
     const addOption = (command, optionsDef) => {
 
@@ -71,15 +98,33 @@ async function main() {
         }
     };
 
-    // add cli parameters
-    addOption(program, config.options.common);
+    // add cli parameters for build command
+    addOption(commandBuild, config.options.common.concat(config.options.build));
+
+    // add cli parameters for build-and-publish command
+    addOption(commandBuildAndPublish, config.options.common.concat(config.options.buildAndPublish));
+
+    commandBuild.action((args) => {
+
+        target = build;
+        setEnvVars(args, config.options.common.concat(config.options.build));
+    });
+
+    commandBuildAndPublish.action((args) => {
+
+        target = buildAndPublish;
+        setEnvVars(args, config.options.common.concat(config.options.buildAndPublish));
+    });
+
+    program.addCommand(commandBuild);
+    program.addCommand(commandBuildAndPublish);
 
     program.parse();
 
-    // put arguments into process.env
-    setEnvVars(program.opts(), config.options.common);
+    if (!target)
+        throw new Error('No target command specified');
 
-    await build({}, getDefaultTasks());
+    await target({}, getDefaultTasks());
 }
 
 if (require.main === module) {
@@ -96,6 +141,7 @@ if (require.main === module) {
 
 module.exports = {
     build,
+    buildAndPublish,
     getDefaultTasks,
     main,
 };

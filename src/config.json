@@ -1,4 +1,14 @@
 {
+  "commands": {
+    "build": {
+      "name": "build",
+      "description": "Build pages and deploy into a directory"
+    },
+    "buildAndPublish": {
+      "name": "build-and-publish",
+      "description": "Build pages and deploy to a branch of a given repository"
+    }
+  },
   "options": {
     "common": [
       {
@@ -9,7 +19,9 @@
           "key": "resourcesPaths",
           "env": "INPUT_RESOURCES_PATHS"
         }
-      },
+      }
+    ],
+    "build": [
       {
         "parameter": "-o, --pages-path <directory path>",
         "description": "The output directory in which the results end up.",
@@ -17,6 +29,35 @@
         "mapping": {
           "key": "pagesPath",
           "env": "INPUT_PAGES_PATH"
+        }
+      }
+    ],
+    "buildAndPublish": [
+      {
+        "parameter": "-b, --branch <Git branch>",
+        "description": "The branch in which the results end up.",
+        "default": "pages",
+        "mapping": {
+          "key": "branch",
+          "env": "INPUT_BRANCH"
+        }
+      },
+      {
+        "parameter": "-r, --remote-url <Git remote URL>",
+        "description": "The remote URL to a repository (default is the origin URL configured in the working directory)",
+        "default": null,
+        "mapping": {
+          "key": "remoteUrl",
+          "env": "INPUT_REMOTE_URL"
+        }
+      },
+      {
+        "parameter": "-u, --user <Git user>",
+        "description": "The Git user info (defaults is global Git config) (format: Full Name <email@domain.tld>)",
+        "default": null,
+        "mapping": {
+          "key": "user",
+          "env": "INPUT_USER"
         }
       }
     ]
