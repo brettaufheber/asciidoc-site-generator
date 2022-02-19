@@ -19,7 +19,7 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "node .",
-    "build": "ncc build ./src/index.js -o ./dist --license licenses.txt",
+    "build": "ncc build ./src/index.js -o ./dist --license licenses.txt && node ./src/makeCopyAssets.js",
     "test": "jest",
     "scan": "sonar-scanner"
   },
