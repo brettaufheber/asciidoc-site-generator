@@ -15,6 +15,7 @@ require('basic-handlebars-helpers').helpers.register();
 
 // register extensions for asciidoctor.js
 require('asciidoctor-highlight.js').register(asciidoctor.Extensions);
+require('@djencks/asciidoctor-mathjax').register(asciidoctor.Extensions);
 
 // setup AsciiDoc for Handlebars helpers
 asciidoc.setupAsciidoctor(asciidoctor, {

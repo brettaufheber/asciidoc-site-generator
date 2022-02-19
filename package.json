@@ -30,6 +30,7 @@
     "commander": "^9.0.x",
     "asciidoctor": "^2.2.x",
     "asciidoctor-highlight.js": "^0.4.x",
+    "@djencks/asciidoctor-mathjax": "^0.0.x",
     "handlebars": "^4.7.x",
     "basic-handlebars-helpers": "^3.0.x",
     "sass": "^1.49.x",
