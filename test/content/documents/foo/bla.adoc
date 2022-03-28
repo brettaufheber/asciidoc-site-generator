@@ -1,0 +1,47 @@
+= Stylesheet Demo
+:copyright: © 2022 MyCompany, CC-BY-SA-4.0 License
+:lang: en
+:showtitle:
+
+== Alert
+
+[d-block alert alert-primary]#A simple primary alert#
+
+[d-block alert alert-secondary]#A simple secondary alert#
+
+[d-block alert alert-success]#A simple success alert#
+
+[d-block alert alert-danger]#A simple danger alert#
+
+[d-block alert alert-warning]#A simple warning alert#
+
+[d-block alert alert-info]#A simple info alert#
+
+[d-block alert alert-light]#A simple light alert#
+
+[d-block alert alert-dark]
+--
+A simple dark alert
+
+with multiline content
+--
+
+== Badge
+
+[badge bg-primary]#Primary#
+[badge bg-secondary]#Secondary#
+[badge bg-success]#Success#
+[badge bg-danger]#Danger#
+[badge bg-warning text-dark]#Warning#
+[badge bg-info text-dark]#Info#
+[badge bg-light text-dark]#Light#
+[badge bg-dark]#Dark#
+
+[badge rounded-pill bg-primary]#Primary#
+[badge rounded-pill bg-secondary]#Secondary#
+[badge rounded-pill bg-success]#Success#
+[badge rounded-pill bg-danger]#Danger#
+[badge rounded-pill bg-warning text-dark]#Warning#
+[badge rounded-pill bg-info text-dark]#Info#
+[badge rounded-pill bg-light text-dark]#Light#
+[badge rounded-pill bg-dark]#Dark#

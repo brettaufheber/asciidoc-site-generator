@@ -1,0 +1,7 @@
+links:
+  - name: AsciiDoc Demo
+    path: ./index.adoc
+  - name: Stylesheet Demo
+    path: ./foo/bla.adoc
+  - name: Empty Page
+    path: ./foo/bar/baz.adoc

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-lg-6">
+    <strong>AsciiDoc attributes:</strong>
+    <ul>
+      {{#each attributes}}
+      <li>{{@key}}: {{.}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="col-lg-6">
+    <strong>Collections:</strong>
+    <ul>
+      {{#each collections}}
+      <li>
+        {{@key}}
+        <pre class="text-dark bg-light p-1 border border-dark">{{to-yaml . forceQuotes=true}}</pre>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
