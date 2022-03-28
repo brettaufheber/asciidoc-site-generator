@@ -1,0 +1,7 @@
+{{~#path~}}
+{{
+resolve-path
+(relative-path (dirname @root.attributes.docfile) '')
+(resolve-path (dirname .) (concat (basename . (extname .)) '.html'))
+}}
+{{~/path~}}

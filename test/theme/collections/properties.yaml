@@ -1,0 +1,4 @@
+project:
+  debug-info: true
+  url: 'https://domain.tld'
+  title: Example Theme

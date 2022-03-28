@@ -1,0 +1,4 @@
+= Empty Page
+:copyright: © 2022 MyCompany, CC-BY-SA-4.0 License
+:lang: en
+:showtitle:
