@@ -65,5 +65,12 @@
     "reportPath": "./tmp",
     "reportFile": "test-report.xml",
     "indent": 4
-  }
+  },
+  "keywords": [
+    "static-site-generator",
+    "gh-pages",
+    "asciidoc",
+    "asciidoctor",
+    "handlebars"
+  ]
 }
