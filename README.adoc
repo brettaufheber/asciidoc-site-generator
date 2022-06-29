@@ -1,5 +1,82 @@
 = asciidoc-site-generator
 
+This project is a static website generator using AsciiDoc files and Handlebars templates.
+
+There is also the project https://github.com/brettaufheber/asciidoc-with-gh-pages-action#readme[asciidoc-with-gh-pages-action] to use this static website generator as a GitHub Action to deploy a website using GitHub Pages.
+
+== Installation
+
+Install asciidoc-site-generator with npm:
+
+[source,bash]
+----
+npm install --save basic-handlebars-helpers
+----
+
+== Usage
+
+The generated output can be deployed either into a directory or to a Git repository.
+Each of the two use cases has its own command.
+
+The arguments for the generator can be passed by parameters or by environment variables.
+For a complete list of parameters and environment variables, display the help view for each instruction.
+
+.Deploy a static website into a directory.
+[source,bash]
+----
+node /path/to/generator build -h # shows how to use the command
+
+node /path/to/generator build \
+  --resources-paths ./path-to-project \
+  --pages-path ./output-directory
+----
+
+.Deploy a static website with version control
+[source,bash]
+----
+node /path/to/generator build-and-publish -h # shows how to use the command
+
+node /path/to/generator build-and-publish \
+  --resources-paths ./path-to-project \
+  --branch my-output-branch \
+  --remote-url my-repo-url \
+  --user "My Name <email@domain.tld>"
+----
+
+The remote URL parameter is not required if this application is running inside the root directory of a Git project and will be determined automatically in this case.
+
+The user parameter is only required if neither a user is configured globally nor is configured in the current working directory.
+
+== The file structure of a project
+
+The structure below does not need to be provided in a single directory and can be split across multiple resource directories.
+
+* */static/* - All files in this directory are copied directly to the output.
+* */documents/* - The AsciiDoc (.adoc) files which will be converted into HTML files.
+* */stylesheets/* - CSS files or SCSS, Sass, Less files which need to be compiled.
+* */collections/* - Some YAML and JSON files providing data available for templating.
+* */templates/* - The https://handlebarsjs.com/guide/[Handlebars] template files.
+In order to allow maximum flexibility for web development, the generated HTML content is passed to Handlebars templates, allowing for a complete separation of content and web design.
+This static website generator comes with some https://github.com/brettaufheber/basic-handlebars-helpers#readme[basic Handlebars helpers].
+* */dependencies.json* - An optional file which lists some packages automatically deployt to the output.
+The notation used for the https://docs.npmjs.com/cli/v7/configuring-npm/package-json#dependencies[dependencies] is the same as for a package.json file.
+An example file can be viewed https://github.com/brettaufheber/asciidoc-site-generator/blob/main/test/theme/dependencies.json[here].
+
+== Example project
+
+To simplify the first steps with the static website generator, an example can be used.
+
+The example project has two resource directories:
+
+* https://github.com/brettaufheber/asciidoc-site-generator/tree/main/test/content[Web content]
+* https://github.com/brettaufheber/asciidoc-site-generator/tree/main/test/theme[Theme]
+
+.Build the example project
+[source,bash]
+----
+node . build -i "./test/content,./test/theme" -o "pages"
+----
+
 == MIT License
 
 Copyright (c) 2022 Eric Löffler (brettaufheber)
